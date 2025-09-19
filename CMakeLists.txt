@@ -97,6 +97,15 @@ if(ROS_EDITION STREQUAL "ROS1")
   link_directories(${PCL_LIBRARY_DIRS})
   add_definitions(${PCL_DEFINITIONS})
 
+  add_executable(livox_repub src/livox_repub.cpp)
+  target_link_libraries(livox_repub ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBS})
+  target_include_directories(livox_repub
+    PUBLIC
+    ${catkin_INCLUDE_DIRS}
+    ${PCL_INCLUDE_DIRS}
+    ${APR_INCLUDE_DIRS}
+    )
+
   #---------------------------------------------------------------------------------------
   # generate excutable and add libraries
   #---------------------------------------------------------------------------------------

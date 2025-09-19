@@ -1,0 +1,7 @@
+<launch>
+
+	<node name="livox_repub_node" pkg="livox_ros_driver2"
+	      type="livox_repub" restart="true"
+	      output="screen"/>
+
+</launch>
