@@ -225,6 +225,15 @@ else(ROS_EDITION STREQUAL "ROS2")
   # Add ROS Version MACRO
   #---------------------------------------------------------------------------------------
   add_definitions(-DBUILDING_ROS2)
+  
+  # Detect ROS distribution
+  if(DEFINED ENV{ROS_DISTRO})
+    if($ENV{ROS_DISTRO} STREQUAL "humble")
+      set(HUMBLE_ROS "humble")
+    else()
+      set(HUMBLE_ROS "other")
+    endif()
+  endif()
 
   # find dependencies
   # uncomment the following section in order to fill in
@@ -298,7 +307,6 @@ else(ROS_EDITION STREQUAL "ROS2")
   else()
     set(LIVOX_INTERFACE_TARGET "${LIVOX_INTERFACES}__rosidl_typesupport_cpp")
     add_dependencies(${PROJECT_NAME} ${LIVOX_INTERFACES})
-    get_target_property(LIVOX_INTERFACES_INCLUDE_DIRECTORIES ${LIVOX_INTERFACE_TARGET} INTERFACE_INCLUDE_DIRECTORIES)
   endif()
 
   # include file direcotry
@@ -306,7 +314,6 @@ else(ROS_EDITION STREQUAL "ROS2")
     ${PCL_INCLUDE_DIRS}
     ${APR_INCLUDE_DIRS}
     ${LIVOX_LIDAR_SDK_INCLUDE_DIR}
-    ${LIVOX_INTERFACES_INCLUDE_DIRECTORIES}   # for custom msgs
     3rdparty
     src
   )
