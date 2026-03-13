@@ -19,6 +19,8 @@ cur_config_path = cur_path + '../config'
 user_config_path = os.path.join(cur_config_path, 'MID360_config.json')
 ################### user configure parameters for ros2 end #####################
 
+RESPAWN_DELAY_SECONDS = 2.0
+
 livox_ros2_params = [
     {"xfer_format": xfer_format},
     {"multi_topic": multi_topic},
@@ -38,6 +40,8 @@ def generate_launch_description():
         executable='livox_ros_driver2_node',
         name='livox_lidar_publisher',
         output='screen',
+        respawn=True,
+        respawn_delay=RESPAWN_DELAY_SECONDS,
         parameters=livox_ros2_params
         )
 
